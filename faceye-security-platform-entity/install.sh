@@ -1,0 +1,1 @@
+mvn clean package install -D maven.test.skip=true -P product

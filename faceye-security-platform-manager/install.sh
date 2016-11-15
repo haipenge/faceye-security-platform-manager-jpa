@@ -1,0 +1,1 @@
+mvn package install -D maven.test.skip=true
