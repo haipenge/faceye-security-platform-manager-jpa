@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.util.Assert;
+import org.junit.Assert;
 
 import com.faceye.component.platform.security.entity.Resource;
 import com.faceye.component.platform.security.service.ResourceService;
@@ -36,7 +36,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 	 */
 	@Before
 	public void set() throws Exception {
-		Assert.isTrue(resourceService != null);
+		Assert.assertTrue(resourceService != null);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 		entity.setName("test");
 		this.resourceService.save(entity);
 		List<Resource> entites = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isNotEmpty(entites));
+		Assert.assertTrue(CollectionUtils.isNotEmpty(entites));
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 		Resource entity = new Resource();
 		this.resourceService.save(entity);
 		List<Resource> entites = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isNotEmpty(entites));
+		Assert.assertTrue(CollectionUtils.isNotEmpty(entites));
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 			this.resourceService.save(entity);
 		}
 		List<Resource> entities = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isNotEmpty(entities) && entities.size() == 5);
+		Assert.assertTrue(CollectionUtils.isNotEmpty(entities) && entities.size() == 5);
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 		this.resourceService.save(entity);
 		logger.debug(">>Entity id is:" + entity.getId());
 		Resource e = this.resourceService.get(entity.getId());
-		Assert.isTrue(e != null);
+		Assert.assertTrue(e != null);
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 		this.resourceService.save(entity);
 		this.resourceService.remove(entity);
 		List<Resource> entities = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isEmpty(entities));
+		Assert.assertTrue(CollectionUtils.isEmpty(entities));
 	}
 
 	@Test
@@ -112,10 +112,10 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 			this.resourceService.save(entity);
 		}
 		List<Resource> entities = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isNotEmpty(entities) && entities.size() == 5);
+		Assert.assertTrue(CollectionUtils.isNotEmpty(entities) && entities.size() == 5);
 		this.resourceService.removeAllInBatch();
 		entities = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isEmpty(entities));
+		Assert.assertTrue(CollectionUtils.isEmpty(entities));
 	}
 
 	@Test
@@ -126,7 +126,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 		}
 		this.resourceService.removeAll();
 		List<Resource> entities = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isEmpty(entities));
+		Assert.assertTrue(CollectionUtils.isEmpty(entities));
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 		}
 		this.resourceService.removeInBatch(entities);
 		entities = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isEmpty(entities));
+		Assert.assertTrue(CollectionUtils.isEmpty(entities));
 	}
 
 	@Test
@@ -150,7 +150,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 			this.resourceService.save(entity);
 		}
 		List<Resource> entities = this.resourceService.getAll();
-		Assert.isTrue(CollectionUtils.isNotEmpty(entities) && entities.size() == 5);
+		Assert.assertTrue(CollectionUtils.isNotEmpty(entities) && entities.size() == 5);
 	}
 
 	@Test
@@ -161,15 +161,15 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 		}
 		Map<String, Object> searchParams = new HashMap<String, Object>();
 		Page<Resource> page = this.resourceService.getPage(searchParams, 1, 5);
-		Assert.isTrue(page != null && page.getSize() == 5);
+		Assert.assertTrue(page != null && page.getSize() == 5);
 		searchParams.put("EQ_name", "test-10");
 		page = this.resourceService.getPage(searchParams, 1, 5);
-		Assert.isTrue(page != null && page.getTotalElements() == 1);
+		Assert.assertTrue(page != null && page.getTotalElements() == 1);
 		searchParams = new HashMap<String, Object>();
 		searchParams.put("LIKE_name", "test");
 		page = this.resourceService.getPage(searchParams, 1, 5);
 
-		Assert.isTrue(page != null && page.getTotalElements() == 25 && page.getNumberOfElements() == 5);
+		Assert.assertTrue(page != null && page.getTotalElements() == 25 && page.getNumberOfElements() == 5);
 
 	}
 
@@ -182,7 +182,7 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 			id = entity.getId();
 		}
 		Resource e = this.resourceService.get(id);
-		Assert.isTrue(e != null);
+		Assert.assertTrue(e != null);
 	}
 
 	@Test
@@ -196,6 +196,6 @@ public class ResourceServiceTestCase extends BaseServiceTestCase {
 			}
 		}
 		List<Resource> entities = this.resourceService.getAll(ids);
-		Assert.isTrue(entities != null && entities.size() == 5);
+		Assert.assertTrue(entities != null && entities.size() == 5);
 	}
 }

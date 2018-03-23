@@ -64,8 +64,8 @@ public class Menu implements Serializable {
 		this.name = name;
 	}
 
-	@OneToOne(optional = false, cascade = CascadeType.REMOVE) 
-	@JoinColumn(name = "resource_id", referencedColumnName = "id",unique = true)
+	@OneToOne(optional = true, cascade = CascadeType.REMOVE) 
+	@JoinColumn(name = "resource_id", referencedColumnName = "id",unique = true,nullable=true,table="platform_security_resource")
 	private Resource resource = null;
 
 	public Resource getResource() {

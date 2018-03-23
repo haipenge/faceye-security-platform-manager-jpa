@@ -24,7 +24,7 @@ import com.faceye.component.platform.security.entity.Role;
 import com.faceye.component.platform.security.entity.User;
 import com.faceye.component.platform.security.service.RoleService;
 import com.faceye.component.platform.security.service.UserService;
-import com.faceye.component.platform.security.util.PasswordEncoder;
+import com.faceye.component.platform.security.util.PasswordEncoderUtil;
 import com.faceye.feature.controller.BaseController;
 import com.faceye.feature.util.http.HttpUtil;
 
@@ -104,7 +104,7 @@ public class UserController extends BaseController<User, Long, UserService> {
 	@RequestMapping("/save")
 	public String save(User entity, RedirectAttributes redirectAttributes) {
 		String password = entity.getPassword();
-		String encodingPassword = PasswordEncoder.encoder(password);
+		String encodingPassword = PasswordEncoderUtil.encoder(password);
 		if (entity.getId() == null) {
 			entity.setPassword(encodingPassword);
 			Role role = this.roleService.get(Long.parseLong(registerRoleId));
@@ -123,7 +123,7 @@ public class UserController extends BaseController<User, Long, UserService> {
 	@RequestMapping("/doRegister")
 	public String doRegister(User entity) {
 		String password = entity.getPassword();
-		String encodingPassword = PasswordEncoder.encoder(password);
+		String encodingPassword = PasswordEncoderUtil.encoder(password);
 		if (entity.getId() == null) {
 			entity.setPassword(encodingPassword);
 			Role role = this.roleService.get(Long.parseLong(registerRoleId));

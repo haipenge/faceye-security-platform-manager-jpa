@@ -158,6 +158,7 @@
 			/> <ref bean="daoAuthenticationProvider" /> <ref bean="anonymousAuthenticationProvider" 
 			/> </list> </property> -->
 	</bean>
+	<!-- 
 	<bean id="passwordEncoder"
 		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
 		<property name="encodeHashAsBase64" value="false" />
@@ -166,11 +167,14 @@
 		class="org.springframework.security.authentication.dao.ReflectionSaltSource">
 		<property name="userPropertyToUse" value="getUsername" />
 	</bean>
+	 -->
 	<bean id="daoAuthenticationProvider"
 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
 		<property name="userDetailsService" ref="platform-userService"></property>
+		<!-- 
 		<property name="passwordEncoder" ref="passwordEncoder"></property>
 		<property name="saltSource" ref="saltSource"></property>
+		 -->
 	</bean>
 
 	<bean id="accessDecisionManager"

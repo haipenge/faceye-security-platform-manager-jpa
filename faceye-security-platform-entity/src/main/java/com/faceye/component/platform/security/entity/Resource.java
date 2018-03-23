@@ -114,6 +114,7 @@ public class Resource implements Serializable {
 	}
 	
 	@OneToOne(optional = true, cascade = CascadeType.REMOVE, mappedBy = "resource")
+	@JoinColumn(name = "menu_id", referencedColumnName = "id",unique = true,nullable=true)
 	private Menu menu=null;
 	public Menu getMenu() {
 		return menu;

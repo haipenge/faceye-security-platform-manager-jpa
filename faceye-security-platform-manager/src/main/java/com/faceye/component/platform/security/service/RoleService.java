@@ -20,4 +20,6 @@ public interface RoleService extends BaseService<Role,Long>{
 	public Collection<ConfigAttribute> getAllConfigAttributes();
 	
 	public void saveRoleAuthResources(Long roleId,Long[] resourceIds);
+	
+	public Role getRoleByName(String name);
 }/**@generate-service-source@**/

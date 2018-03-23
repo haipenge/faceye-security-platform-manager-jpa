@@ -19,7 +19,7 @@ import com.faceye.component.platform.security.repository.jpa.ResourceRepository;
 import com.faceye.component.platform.security.repository.jpa.RoleRepository;
 import com.faceye.component.platform.security.service.RoleService;
 import com.faceye.feature.service.impl.BaseServiceImpl;
-import com.faceye.feature.util.ServiceException;
+ 
 /**
  * 角色服务类
  * @author @haipenge 
@@ -39,13 +39,13 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long, RoleRepository>
 	}
 	
 	@Override
-	public void remove(Long id) throws ServiceException {
+	public void remove(Long id)  {
              Role role=this.get(id);
              this.remove(role);
 	}
 
 	@Override
-	public void remove(Role entity) throws ServiceException {
+	public void remove(Role entity)  {
 		dao.delete(entity);
 	}
 
@@ -64,17 +64,22 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long, RoleRepository>
 
 	@Override
 	public void saveRoleAuthResources(Long roleId, Long[] resourceIds) {
-	   Role role=this.dao.findOne(roleId);
+	   Role role=this.dao.getOne(roleId);
 	   Set<Resource> resources=role.getResources();
 	   resources.clear();
 	   if(resourceIds!=null &&resourceIds.length>0){
 		   for(Long resourceId:resourceIds){
-			   Resource resource=this.resourceRepository.findOne(resourceId);
+			   Resource resource=this.resourceRepository.getOne(resourceId);
 			   resources.add(resource);
 		   }
 	   }
 	   role.setResources(resources);
 	   this.dao.save(role);
+	}
+
+	@Override
+	public Role getRoleByName(String name) {
+		return dao.getRoleByName(name);
 	}
 	
 	
